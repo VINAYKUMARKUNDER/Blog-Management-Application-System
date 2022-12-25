@@ -48,6 +48,7 @@
 - validation for the Email  and Password.
 - validation for the current user and user identification
 - RESTFUL API with CRUD operations
+- Can upload one post image.
 
 <br>
 <br>
