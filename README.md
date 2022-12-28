@@ -44,8 +44,7 @@
 <br>
 
 - User Login authentication
-- validation for the mobile number number
-- validation for the Email  and Password.
+- validation for the Username  and Password.
 - validation for the current user and user identification
 - RESTFUL API with CRUD operations
 - Can upload one post image.
