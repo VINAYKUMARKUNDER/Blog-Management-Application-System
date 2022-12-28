@@ -49,12 +49,12 @@ public class PostServiceImpl implements PostService {
 				.orElseThrow(() -> new ResponseNotFoundException("Category", "category id", categoryId));
 
 		Post post = modelMapper.map(postDto, Post.class);
-		System.out.println(user);
+//		System.out.println(user);
 		post.setUsers(user);
 		post.setCategory(category);
 		post.setDate(LocalDate.now());
 		postRepository.save(post);
-		System.out.println(user);
+//		System.out.println(user);
 		return modelMapper.map(post, PostDto.class);
 	}
 

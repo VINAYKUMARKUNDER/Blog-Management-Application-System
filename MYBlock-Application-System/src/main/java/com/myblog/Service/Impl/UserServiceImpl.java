@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto updateUser(userDtoAdding userDto, Integer userId) {
 		userRepository.findById(userId).orElseThrow(() -> new ResponseNotFoundException("User", "User Id", userId));
 		User user = modelMapper.map(userDto, User.class);
+		user.setUserId(userId);
 		userRepository.save(user);
 		return modelMapper.map(user, UserDto.class);
 	}
