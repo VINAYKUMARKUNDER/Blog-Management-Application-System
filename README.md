@@ -65,11 +65,7 @@ The following Diagram depicts the flow of our Entity Relation Diagram to simplif
 <br>
 <hr>
 
-# Services Table
-<hr>
-The following Diagram depicts the services of our EZWallet modules
-<br>
-<br>
+
   
   
 <img src="https://i.ibb.co/K9XNjLb/2.jpg"  width="100%" height="400">
