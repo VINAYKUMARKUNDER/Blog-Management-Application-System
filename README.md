@@ -64,7 +64,7 @@ The following Diagram depicts the flow of our Entity Relation Diagram to simplif
 
   
   
-<img src="https://i.ibb.co/K9XNjLb/2.jpg"  width="100%" height="400">
+<img src="https://www.linkpicture.com/q/My_Blog_ER.png"  width="100%" height="400">
 <br>
 <br>
 <hr>
