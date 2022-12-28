@@ -14,7 +14,7 @@ public interface UserService {
 	List<UserDto> getAllUser();
 //	UserDto getUserByEamil(String email);
 	
-	String addRoll(Integer rollId, Integer userId);
+//	String addRoll(Integer rollId, Integer userId);
 	
 	
 }

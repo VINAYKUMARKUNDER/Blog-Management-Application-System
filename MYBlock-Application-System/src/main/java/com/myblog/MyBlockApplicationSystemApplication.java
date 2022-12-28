@@ -8,19 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.myblog.Service.Impl.UserServiceImpl;
-
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
 @EnableSwagger2
-public class MyBlockApplicationSystemApplication implements CommandLineRunner{
+public class MyBlockApplicationSystemApplication {
 	
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+//	
 	public static void main(String[] args) {
 		
 		SpringApplication.run(MyBlockApplicationSystemApplication.class, args);
@@ -33,11 +31,10 @@ public class MyBlockApplicationSystemApplication implements CommandLineRunner{
 		return new ModelMapper();
 	}
 
-
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println(passwordEncoder.encode("xyz"));
-		
-	}
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//		System.out.println(passwordEncoder.encode("xyz"));	
+//	}
 
 }

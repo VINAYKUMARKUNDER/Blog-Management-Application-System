@@ -5,11 +5,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import com.myblog.Exception.ResponseNotFoundException;
-import com.myblog.Model.Role;
 import com.myblog.Model.User;
 import com.myblog.Repository.RoleRepository;
 import com.myblog.Repository.UserRepository;
@@ -71,15 +69,15 @@ public class UserServiceImpl implements UserService {
 //		return modelMapper.map(user, UserDto.class);
 //	}
 	
-	
-	@Override
-	public String addRoll(Integer rollId, Integer userID) {
-		User user = userRepository.findById(userID).orElseThrow(()-> new ResponseNotFoundException("user ", "user id :",userID));
-		Role roll = roleRepository.findById(rollId).orElseThrow(()-> new ResponseNotFoundException("Roll ", "roll id :",rollId));
-		List<Role> roles = user.getRoles();
-		roles.add(roll);
-		user.setRoles(roles);
-		userRepository.save(user);
-	return "Add Successfully";
-	}
+//	
+//	@Override
+//	public String addRoll(Integer rollId, Integer userID) {
+//		User user = userRepository.findById(userID).orElseThrow(()-> new ResponseNotFoundException("user ", "user id :",userID));
+//		Role roll = roleRepository.findById(rollId).orElseThrow(()-> new ResponseNotFoundException("Roll ", "roll id :",rollId));
+//		List<Role> roles = user.getRoles();
+//		roles.add(roll);
+//		user.setRoles(roles);
+//		userRepository.save(user);
+//	return "Add Successfully";
+//	}
 }

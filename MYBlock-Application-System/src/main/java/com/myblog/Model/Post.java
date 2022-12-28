@@ -14,15 +14,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Post {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer postId;
 	private String postTitle;
 	
@@ -37,7 +41,7 @@ public class Post {
 	@ManyToOne
 	private Category category;
 	
-//	@OneToMany(cascade = CascadeType.ALL,mappedBy = "post",fetch = FetchType.LAZY)
-//	List<Comments> comments = new ArrayList<>();
-
+	@OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
+	private List<Comments> comments = new ArrayList<>();
+	
 }

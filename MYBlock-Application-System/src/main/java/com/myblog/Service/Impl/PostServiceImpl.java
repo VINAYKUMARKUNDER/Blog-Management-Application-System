@@ -22,6 +22,7 @@ import com.myblog.Repository.PostRepository;
 import com.myblog.Repository.UserRepository;
 import com.myblog.Service.PostService;
 import com.myblog.utilDto.CategoryDto;
+import com.myblog.utilDto.CommentsDto;
 import com.myblog.utilDto.PageResponse;
 import com.myblog.utilDto.PostDto;
 
@@ -78,7 +79,10 @@ public class PostServiceImpl implements PostService {
 	public PostDto getPost(Integer postId) {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(() -> new ResponseNotFoundException("Post", "post id", postId));
-		return modelMapper.map(post, PostDto.class);
+//		System.out.println(post.getComments());
+		PostDto map = modelMapper.map(post, PostDto.class);
+		map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class)).collect(Collectors.toList()));
+		return map;
 	}
 
 	@Override
@@ -88,8 +92,15 @@ public class PostServiceImpl implements PostService {
 		Pageable page= PageRequest.of(pageNumber, pageSize,sortInfo);
 		 Page<Post> findAll = postRepository.findAll(page);
 		 List<Post> posts = findAll.getContent();
-		List<PostDto> allPosts =posts.stream().map(post -> modelMapper.map(post, PostDto.class))
-				.collect(Collectors.toList());
+//		List<PostDto> allPosts =posts.stream().map(post -> modelMapper.map(post, PostDto.class))
+//				.collect(Collectors.toList());
+		List<PostDto> allPosts = new ArrayList<>(); 
+		
+	for(Post post:posts) {	
+		PostDto map = modelMapper.map(post, PostDto.class);
+		map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class)).collect(Collectors.toList()));
+		allPosts.add(map);
+	}
 		
 		PageResponse pageResponse= new PageResponse();
 		pageResponse.setContent(allPosts);
@@ -132,7 +143,7 @@ public class PostServiceImpl implements PostService {
 		User user = userRepository.findById(usreId)
 				.orElseThrow(() -> new ResponseNotFoundException("User", "user id", usreId));
 		List<PostDto> allPosts = postRepository.findByUsers(user).stream()
-				.map(post -> modelMapper.map(user, PostDto.class)).collect(Collectors.toList());
+				.map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 		return allPosts;
 	}
 

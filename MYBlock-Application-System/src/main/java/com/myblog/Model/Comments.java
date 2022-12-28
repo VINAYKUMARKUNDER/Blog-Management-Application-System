@@ -8,14 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToMany;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Comments {
 	
 	@Id
@@ -28,7 +31,7 @@ public class Comments {
 	@ManyToOne
 	private Post post;
 	
-	@ManyToMany
-	private List<User> users = new ArrayList<>();
+	@ManyToOne
+	private User users;
 
 }

@@ -14,6 +14,7 @@ import com.myblog.Repository.UserRepository;
 import com.myblog.Service.CommentsService;
 import com.myblog.utilDto.CommentsDto;
 import com.myblog.utilDto.CommentsDtoAdding;
+import com.myblog.utilDto.UserDto;
 
 @Service
 public class CommentServiceImpl implements CommentsService {
@@ -32,14 +33,16 @@ public class CommentServiceImpl implements CommentsService {
 
 	@Override
 	public CommentsDto createComments(CommentsDtoAdding cDto, Integer userId, Integer postId) {
-//		User user = userRepository.findById(userId).orElseThrow(()-> new ResponseNotFoundException("User ", "User Id", userId));
-//		Post post = postRepository.findById(postId).orElseThrow(()-> new ResponseNotFoundException("Post", "post Id", userId));
-//		Comments comments = modelMapper.map(cDto, Comments.class);
-//		comments.setPost(post);
-//		commentsRepository.save(comments);
-//		
-//		return modelMapper.map(comments, CommentsDto.class);
-		return null;
+		User user = userRepository.findById(userId).orElseThrow(()-> new ResponseNotFoundException("User ", "User Id", userId));
+		Post post = postRepository.findById(postId).orElseThrow(()-> new ResponseNotFoundException("Post", "post Id", userId));
+		Comments comments = modelMapper.map(cDto, Comments.class);
+		comments.setPost(post);
+		comments.setUsers(user);
+		
+		commentsRepository.save(comments);
+		CommentsDto commentsDto = modelMapper.map(comments, CommentsDto.class);
+		commentsDto.setUsers(modelMapper.map(user, UserDto.class));
+		return commentsDto;
 	}
 
 	@Override

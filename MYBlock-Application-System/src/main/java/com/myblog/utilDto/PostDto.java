@@ -1,6 +1,10 @@
 package com.myblog.utilDto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.myblog.Model.Comments;
 
 import lombok.Data;
 
@@ -16,6 +20,8 @@ public class PostDto {
 	private UserDto users;
 	
 	private CategoryDto category;
+	
+	private List<CommentsDto> commentsDto = new ArrayList<>();
 
 
 }
