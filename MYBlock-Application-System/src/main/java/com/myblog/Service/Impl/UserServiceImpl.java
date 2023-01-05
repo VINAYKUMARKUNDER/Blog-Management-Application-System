@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.myblog.Exception.ResponseNotFoundException;
@@ -26,10 +27,14 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDto addUser(userDtoAdding userDto) {
 		User user = modelMapper.map(userDto, User.class);
+		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		userRepository.save(user);
 		return modelMapper.map(user, UserDto.class);
 	}
