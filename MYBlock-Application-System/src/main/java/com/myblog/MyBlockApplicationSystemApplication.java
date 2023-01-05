@@ -16,9 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class MyBlockApplicationSystemApplication {
 	
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
-//	
 	public static void main(String[] args) {
 		
 		SpringApplication.run(MyBlockApplicationSystemApplication.class, args);
@@ -31,10 +28,5 @@ public class MyBlockApplicationSystemApplication {
 		return new ModelMapper();
 	}
 
-//
-//	@Override
-//	public void run(String... args) throws Exception {
-//		System.out.println(passwordEncoder.encode("xyz"));	
-//	}
 
 }

@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User implements UserDetails {
+public class User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
@@ -55,47 +55,5 @@ public class User implements UserDetails {
 ////	)
 //	private Set<Role> roles = new HashSet<>();
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		List<SimpleGrantedAuthority> collect = this.roles.stream()
-//				.map(roll -> new SimpleGrantedAuthority(roll.getName())).collect(Collectors.toList());
-		return null;
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return this.userPassword;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return this.email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
+	
 }

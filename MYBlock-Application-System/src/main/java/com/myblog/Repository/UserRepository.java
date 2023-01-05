@@ -10,7 +10,6 @@ import com.myblog.Model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
-	List<User> findByUserName(String userName);
 	
 	Optional<User> findByEmail(String userEmail);
 
