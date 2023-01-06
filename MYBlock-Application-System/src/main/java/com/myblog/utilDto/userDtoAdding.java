@@ -26,6 +26,8 @@ public class userDtoAdding {
 	
 	@NotNull(message = "plese put about max 100 char charecter..")
 	private String about;
+	
+	private String role;
 
 
 }

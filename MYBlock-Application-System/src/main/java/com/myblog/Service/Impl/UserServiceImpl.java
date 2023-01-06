@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.myblog.Exception.ResponseNotFoundException;
 import com.myblog.Model.User;
-import com.myblog.Repository.RoleRepository;
 import com.myblog.Repository.UserRepository;
 import com.myblog.Service.UserService;
 import com.myblog.utilDto.UserDto;
@@ -25,8 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@Autowired
-	private RoleRepository roleRepository;
+	
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -44,6 +42,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.findById(userId).orElseThrow(() -> new ResponseNotFoundException("User", "User Id", userId));
 		User user = modelMapper.map(userDto, User.class);
 		user.setUserId(userId);
+		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		userRepository.save(user);
 		return modelMapper.map(user, UserDto.class);
 	}
@@ -69,21 +68,5 @@ public class UserServiceImpl implements UserService {
 		return allUserDetos;
 	}
 
-//	@Override
-//	public UserDto getUserByEamil(String email) {
-//		User user = userRepository.findByUserEmail(email).orElseThrow(()-> new ResponseNotFoundException("user ", "Email :"+email, 0));
-//		return modelMapper.map(user, UserDto.class);
-//	}
-	
-//	
-//	@Override
-//	public String addRoll(Integer rollId, Integer userID) {
-//		User user = userRepository.findById(userID).orElseThrow(()-> new ResponseNotFoundException("user ", "user id :",userID));
-//		Role roll = roleRepository.findById(rollId).orElseThrow(()-> new ResponseNotFoundException("Roll ", "roll id :",rollId));
-//		List<Role> roles = user.getRoles();
-//		roles.add(roll);
-//		user.setRoles(roles);
-//		userRepository.save(user);
-//	return "Add Successfully";
-//	}
+
 }

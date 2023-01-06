@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder.BindingResolver.Unique;
 
 @Entity
 @Getter
@@ -37,23 +39,22 @@ public class User{
 	private Integer userId;
 
 	private String userName;
-
+	
+	@Column(unique=true)
 	private String email;
 
 	private String userPassword;
 
 	private String about;
+	
+	private String role;
 
 	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<>();
 
 	@OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Comments> comments = new ArrayList<>();
-//
-//	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-////	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id")
-////	)
-//	private Set<Role> roles = new HashSet<>();
+
 
 	
 }

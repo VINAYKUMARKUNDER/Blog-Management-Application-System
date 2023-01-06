@@ -1,8 +1,10 @@
 package com.myblog.Model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserAuthModel implements UserDetails{
@@ -14,8 +16,10 @@ public class UserAuthModel implements UserDetails{
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	Collection<GrantedAuthority> auth = new ArrayList<>();
+	SimpleGrantedAuthority simple = new SimpleGrantedAuthority(user.getRole());
+	auth.add(simple);
+		return auth;
 	}
 
 	@Override
