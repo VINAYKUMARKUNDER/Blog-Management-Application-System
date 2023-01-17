@@ -2,7 +2,6 @@ package com.myblog.Service;
 
 import java.util.List;
 
-import com.myblog.Model.User;
 import com.myblog.utilDto.UserDto;
 import com.myblog.utilDto.userDtoAdding;
 

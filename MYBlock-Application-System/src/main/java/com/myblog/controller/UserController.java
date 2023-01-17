@@ -2,8 +2,6 @@ package com.myblog.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myblog.Model.User;
 import com.myblog.Service.UserService;
 import com.myblog.utilDto.UserDto;
 import com.myblog.utilDto.userDtoAdding;
@@ -61,10 +58,4 @@ public class UserController {
 		return new ResponseEntity<List<UserDto>>(allUser, HttpStatus.OK);
 	}
 	
-//	@GetMapping("/email/{email}/")
-//	public ResponseEntity<UserDto> getByEmail(@PathVariable String email){
-//		UserDto userByEamil = userService.getUserByEamil(email);
-//		return new ResponseEntity<UserDto>(userByEamil,HttpStatus.OK);
-//	}
-
 }

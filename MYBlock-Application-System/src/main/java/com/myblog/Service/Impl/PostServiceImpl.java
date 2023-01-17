@@ -21,7 +21,6 @@ import com.myblog.Repository.CategoryRepository;
 import com.myblog.Repository.PostRepository;
 import com.myblog.Repository.UserRepository;
 import com.myblog.Service.PostService;
-import com.myblog.utilDto.CategoryDto;
 import com.myblog.utilDto.CommentsDto;
 import com.myblog.utilDto.PageResponse;
 import com.myblog.utilDto.PostDto;
@@ -149,7 +148,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDto> searchPost(String keyword) {
-		System.out.println(keyword);
+//		System.out.println(keyword);
 		List<PostDto> listOfPosts = postRepository.findByPostContent("%"+keyword+"%").stream()
 				.map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 		return listOfPosts;

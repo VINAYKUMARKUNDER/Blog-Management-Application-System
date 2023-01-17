@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myblog.Model.Comments;
-
 import lombok.Data;
 
 @Data
