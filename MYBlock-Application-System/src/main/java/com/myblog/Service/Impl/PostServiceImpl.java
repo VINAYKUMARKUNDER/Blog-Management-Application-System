@@ -40,6 +40,9 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	
+	
+	
 	@Override
 	public PostDto addPost(PostDto postDto, Integer userId, Integer categoryId) {
 		User user = userRepository.findById(userId)
@@ -47,16 +50,23 @@ public class PostServiceImpl implements PostService {
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResponseNotFoundException("Category", "category id", categoryId));
 
+		
+	 
 		Post post = modelMapper.map(postDto, Post.class);
-//		System.out.println(user);
 		post.setUsers(user);
 		post.setCategory(category);
 		post.setDate(LocalDate.now());
 		postRepository.save(post);
-//		System.out.println(user);
 		return modelMapper.map(post, PostDto.class);
+		
+	
+		
 	}
 
+	
+	
+	
+	
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {
 		postRepository.findById(postId).orElseThrow(() -> new ResponseNotFoundException("Post", "Post Id", postId));
@@ -65,6 +75,10 @@ public class PostServiceImpl implements PostService {
 		postRepository.save(post);
 		return modelMapper.map(post, PostDto.class);
 	}
+	
+	
+	
+	
 
 	@Override
 	public PostDto deletePost(Integer postId) {
@@ -73,61 +87,75 @@ public class PostServiceImpl implements PostService {
 		postRepository.delete(post);
 		return modelMapper.map(post, PostDto.class);
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public PostDto getPost(Integer postId) {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(() -> new ResponseNotFoundException("Post", "post id", postId));
-//		System.out.println(post.getComments());
 		PostDto map = modelMapper.map(post, PostDto.class);
-		map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class)).collect(Collectors.toList()));
+		map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class))
+				.collect(Collectors.toList()));
 		return map;
 	}
-
-	@Override
-	public PageResponse getAllPost(Integer pageNumber, Integer pageSize,String sort, String sortDirection) {
-	Sort sortInfo=	(sortDirection.equalsIgnoreCase("asc")) ? Sort.by(sort).ascending() : Sort.by(sort).descending();
-		
-		Pageable page= PageRequest.of(pageNumber, pageSize,sortInfo);
-		 Page<Post> findAll = postRepository.findAll(page);
-		 List<Post> posts = findAll.getContent();
-//		List<PostDto> allPosts =posts.stream().map(post -> modelMapper.map(post, PostDto.class))
-//				.collect(Collectors.toList());
-		List<PostDto> allPosts = new ArrayList<>(); 
-		
-	for(Post post:posts) {	
-		PostDto map = modelMapper.map(post, PostDto.class);
-		map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class)).collect(Collectors.toList()));
-		allPosts.add(map);
-	}
-		
-		PageResponse pageResponse= new PageResponse();
-		pageResponse.setContent(allPosts);
-		pageResponse.setPageNumber(findAll.getNumber());
-		pageResponse.setPageSize(findAll.getSize());
-		pageResponse.setTotalElement(findAll.getNumberOfElements());
-		pageResponse.setPageStatus(findAll.isLast());
-		pageResponse.setTotalPage(findAll.getTotalPages());
-		return pageResponse;
-	}
+	
+	
 	
 	
 	
 
 	@Override
-	public PageResponse getAllPostByCategory(String category,Integer pageNumber, Integer pageSize,String sort, String sortDirection) {
-      Category findByCategory = categoryRepository.findByCategory(category);
-		
-		Sort sortInfo=	(sortDirection.equalsIgnoreCase("asc")) ? Sort.by(sort).ascending() : Sort.by(sort).descending();
-		Pageable page= PageRequest.of(pageNumber, pageSize,sortInfo);
-		
-	
-			 List<Post> allPost = postRepository.findByCategory(findByCategory,page);
+	public PageResponse getAllPost(Integer pageNumber, Integer pageSize, String sort, String sortDirection) {
+		Sort sortInfo = (sortDirection.equalsIgnoreCase("asc")) ? Sort.by(sort).ascending()
+				: Sort.by(sort).descending();
+
+		Pageable page = PageRequest.of(pageNumber, pageSize, sortInfo);
 		Page<Post> findAll = postRepository.findAll(page);
-		List<PostDto> allPosts =allPost.stream().map(post -> modelMapper.map(post, PostDto.class))
+		List<Post> posts = findAll.getContent();
+		List<PostDto> allPosts = new ArrayList<>();
+
+		for (Post post : posts) {
+			PostDto map = modelMapper.map(post, PostDto.class);
+			map.setCommentsDto(post.getComments().stream().map(com -> modelMapper.map(com, CommentsDto.class))
+					.collect(Collectors.toList()));
+			allPosts.add(map);
+		}
+
+		PageResponse pageResponse = new PageResponse();
+		pageResponse.setContent(allPosts);
+		pageResponse.setPageNumber(findAll.getNumber());
+		pageResponse.setPageSize(findAll.getSize());
+		pageResponse.setTotalElement(findAll.getNumberOfElements());
+		pageResponse.setPageStatus(findAll.isLast());
+		pageResponse.setTotalPage(findAll.getTotalPages());
+		return pageResponse;
+	}
+	
+	
+	
+	
+	
+	
+
+	@Override
+	public PageResponse getAllPostByCategory(String category, Integer pageNumber, Integer pageSize, String sort,
+			String sortDirection) {
+		Category findByCategory = categoryRepository.findByCategory(category);
+
+		Sort sortInfo = (sortDirection.equalsIgnoreCase("asc")) ? Sort.by(sort).ascending()
+				: Sort.by(sort).descending();
+		Pageable page = PageRequest.of(pageNumber, pageSize, sortInfo);
+
+		List<Post> allPost = postRepository.findByCategory(findByCategory, page);
+		Page<Post> findAll = postRepository.findAll(page);
+		List<PostDto> allPosts = allPost.stream().map(post -> modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
-		
-		PageResponse pageResponse= new PageResponse();
+
+		PageResponse pageResponse = new PageResponse();
 		pageResponse.setContent(allPosts);
 		pageResponse.setPageNumber(findAll.getNumber());
 		pageResponse.setPageSize(findAll.getSize());
@@ -137,6 +165,12 @@ public class PostServiceImpl implements PostService {
 		return pageResponse;
 	}
 
+	
+	
+	
+	
+	
+	
 	@Override
 	public List<PostDto> getAllPostByUserId(Integer usreId) {
 		User user = userRepository.findById(usreId)
@@ -148,17 +182,26 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDto> searchPost(String keyword) {
-//		System.out.println(keyword);
-		List<PostDto> listOfPosts = postRepository.findByPostContent("%"+keyword+"%").stream()
+		List<PostDto> listOfPosts = postRepository.findByPostContent("%" + keyword + "%").stream()
 				.map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 		return listOfPosts;
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public List<PostDto> searchAllPostByTitle(String title) {
-		List<Post> findByPostTitle = postRepository.findByPostTitle("%"+title+"%");
-		List<PostDto> collect = findByPostTitle.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		List<Post> findByPostTitle = postRepository.findByPostTitle("%" + title + "%");
+		List<PostDto> collect = findByPostTitle.stream().map(post -> modelMapper.map(post, PostDto.class))
+				.collect(Collectors.toList());
 		return collect;
 	}
+	
+	
+	
+	
 
 }
