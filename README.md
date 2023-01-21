@@ -12,8 +12,6 @@
 
 1) Responsible for creating the User module.
 
-2) Responsible for creating the Role Module.
-
 3) Responsible for creating the Comments Module.
 
 4) Responsible for creating the Post Module.
@@ -31,7 +29,6 @@
 # Modules
 <hr>
 <li>User
-<li>Role
 <li>Post
 <li>Comments
 <li>Category
@@ -47,7 +44,6 @@
 - validation for the Username  and Password.
 - validation for the current user and user identification
 - RESTFUL API with CRUD operations
-- Can upload one post image.
 
 <br>
 <br>
