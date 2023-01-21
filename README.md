@@ -59,7 +59,7 @@ The following Diagram depicts the flow of our Entity Relation Diagram to simplif
 
   
   
-<img src="https://www.linkpicture.com/q/My_Blog_ER.png"  width="100%" height="400">
+<img src="https://www.linkpicture.com/q/er-Digramm.png"  width="100%" height="400">
 <br>
 <br>
 <hr>
@@ -78,7 +78,6 @@ The following Diagram depicts the flow of our Entity Relation Diagram to simplif
 <li>Maven
 <li>MySQL
 <li>Swagger
-<li>AWS
 <li>Lombok
 
   
