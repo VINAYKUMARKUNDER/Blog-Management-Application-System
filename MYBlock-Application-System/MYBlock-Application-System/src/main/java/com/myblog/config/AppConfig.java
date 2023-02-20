@@ -25,8 +25,9 @@ public class AppConfig {
 		.anyRequest()
 		.authenticated()
 		.and()
-		.addFilterAfter(new JwtTokenGenraterFilter(), BasicAuthenticationFilter.class)
 		.addFilterBefore(new JwtTokenGenraterFilter(), BasicAuthenticationFilter.class)
+		.addFilterAfter(new JwtTokenGenraterFilter(), BasicAuthenticationFilter.class)
+		
 		.formLogin()
 		.and()
 		.httpBasic();
