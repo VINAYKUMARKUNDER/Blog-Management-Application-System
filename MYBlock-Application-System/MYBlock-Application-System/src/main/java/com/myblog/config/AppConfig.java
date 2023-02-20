@@ -19,14 +19,14 @@ public class AppConfig {
 		http
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
+		.csrf().disable()
 		.authorizeHttpRequests()
-		.mvcMatchers("/public/**").permitAll()
+		.mvcMatchers("/public/**", "/api/post/").permitAll()
 		.anyRequest()
 		.authenticated()
 		.and()
 		.addFilterAfter(new JwtTokenGenraterFilter(), BasicAuthenticationFilter.class)
 		.addFilterBefore(new JwtTokenGenraterFilter(), BasicAuthenticationFilter.class)
-		.csrf().disable()
 		.formLogin()
 		.and()
 		.httpBasic();

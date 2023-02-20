@@ -28,12 +28,12 @@ public class JwtTokenGenraterFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		System.out.println(authentication);
+		System.out.println(authentication+"  something is ");
 		
 		if(authentication != null) {
-			SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
+			SecretKey key = Keys.hmacShaKeyFor(BlogConstent.JWT_KEY.getBytes());
 			
 			String jwtKey = Jwts.builder()
 			.setIssuer("Vinay")
@@ -44,7 +44,7 @@ public class JwtTokenGenraterFilter extends OncePerRequestFilter{
 		    .setExpiration(new Date(new Date().getTime()+3000000))
 		    .signWith(key).compact();
 			
-			response.setHeader(SecurityConstants.JWT_HEADER, jwtKey);	
+			response.setHeader(BlogConstent.JWT_HEADER, jwtKey);	
 		}	
 			filterChain.doFilter(request, response);
 	}
@@ -62,7 +62,7 @@ public class JwtTokenGenraterFilter extends OncePerRequestFilter{
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 	
-		return !request.getServletPath().equals("/signIn");
+		return request.getServletPath().equals("/signIn");
 	}
 
 }

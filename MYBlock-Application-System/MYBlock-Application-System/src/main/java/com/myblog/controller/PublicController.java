@@ -1,5 +1,6 @@
 package com.myblog.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,10 @@ public class PublicController {
 	
 	
 	@Autowired
+	private ModelMapper modelMapper;
+	
+	
+	@Autowired
 	private UserService userService;
 	
 	@GetMapping("/home/")
@@ -50,9 +55,13 @@ public class PublicController {
 
 	
 	@GetMapping("/signIn/")
-	public ResponseEntity<User>  getLogControllerHandler(Authentication auth){
+	public ResponseEntity<UserDto>  getLogControllerHandler(Authentication auth){
+		System.out.println(auth);
 		User user = userRepository.findByEmail(auth.getName()).orElseThrow(()-> new BadCredentialsException("Emial is not found plese put write email.."));
-		return new ResponseEntity<User>(user,HttpStatus.OK);
+		System.out.println(user);
+		
+		UserDto map = modelMapper.map(user, UserDto.class);
+		return new ResponseEntity<UserDto>(map,HttpStatus.OK);
 	}
 	
 	

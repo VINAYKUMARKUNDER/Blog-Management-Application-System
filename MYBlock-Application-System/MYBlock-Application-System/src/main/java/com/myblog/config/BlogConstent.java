@@ -6,5 +6,7 @@ public class BlogConstent {
 	public static final String PAGE_SIZE="5";
 	public static final String SORT_BY="postId";
 	public static final String SORT_DIRECTION="asc";
+	public static final String JWT_KEY ="secretsdsfsfcsdsdefsfiamvinaykumarkundersongardha";
+	public static final String JWT_HEADER = "Authorization";
 
 }

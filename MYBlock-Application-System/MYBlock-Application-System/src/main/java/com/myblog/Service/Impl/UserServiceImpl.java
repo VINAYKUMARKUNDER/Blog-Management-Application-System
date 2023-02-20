@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 		User save = userRepository.save(user);
 		 UserDto map = modelMapper.map(save, UserDto.class);
 		 map.setUserName(userDto.getUserName());
-		 System.out.println(userDto);
 		return map;
 	}
 

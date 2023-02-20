@@ -32,7 +32,7 @@ public class JwtTokenValidaterFilter extends OncePerRequestFilter{
 		
 		
 		
-		String jwt = request.getHeader(SecurityConstants.JWT_HEADER);
+		String jwt = request.getHeader(BlogConstent.JWT_HEADER);
 		System.out.println(jwt);
 		
 		if(jwt != null) {
@@ -41,7 +41,7 @@ public class JwtTokenValidaterFilter extends OncePerRequestFilter{
 				
 			
 			jwt = jwt.substring(7);
-			SecretKey key  = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
+			SecretKey key  = Keys.hmacShaKeyFor(BlogConstent.JWT_KEY.getBytes());
 			
 			Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJwt(jwt).getBody();
 		   
