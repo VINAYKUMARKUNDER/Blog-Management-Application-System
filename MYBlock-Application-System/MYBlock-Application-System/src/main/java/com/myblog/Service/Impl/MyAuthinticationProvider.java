@@ -39,7 +39,7 @@ public class MyAuthinticationProvider implements AuthenticationProvider {
 		
 		User customer = userRepository.findByEmail(username).orElseThrow(()-> new BadCredentialsException("Something worng.."));
 		
-		if(passwordEncoder.matches(password, customer.getPassword())) {
+		if(passwordEncoder.matches(password, customer.getUserPassword())) {
 			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 			
 			return new UsernamePasswordAuthenticationToken(username,password, grantedAuthorities);
